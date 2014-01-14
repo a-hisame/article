@@ -107,45 +107,48 @@ ODT形式で出力されたデータが最もデザイナの画面に忠実な�
 Eclipse BIRT Designerを開くと、以下のような画面が表示される。
 (Eclipseなので、画面のデザインは自分の好みでカスタマイズ可能)
 
-.. image: image/eclipse-layout.png
+.. image:: image/eclipse-layout.png
 
 良く利用するタブと、その役割は以下の通りである。
 
-:メイン画面(右上):
-  デザイナのメイン画面。
-  この画面上の要素を選択、編集、ドラッグなどすることでレポートの雛形を編集する。
-  
-  左下にLayout, Master Page, Script, XML Source, Previewがあるが、それぞれ以下の役割を持つ。
-  
-  - Layout: 通常のデザイナ。GUIベースの操作を行う画面。
-  - Master Page: レポート全体の設定を行う。用紙サイズや余白の調整など。
-  - Script: レポートの要素を判定するプログラムを記述できる。本稿では扱わない。
-  - XML Source: デザイナが生成した生のXMLソースを編集できる。Layoutでは面倒くさい細かい作業を行うのに使うと便利。
-  - Preview: 実際のデータソースを読み込んだプレビューを行える。ただし、幾つかの条件でレイアウトが崩れる(きちんと出力すると直っている)。
+.. list-table:: 表4-1. 画面の説明
+   :header-rows: 1
 
-:Navigator(左下):
-  今開いているEclipseで管理しているプロジェクトが表示される。
-  ファイルの追加などは、この画面の右クリックからが便利
-  (普段利用しているEclipseと同様の作業が可能)。
-
-:Data Explorer(左上):
-  このレポートで利用する変数関連の設定を行う。
-  例えば、以下のような設定ができる。
-  
-  - データソース(レポート用のデータの取得元)を設定
-  - 取得するデータの形式定義(例えば、DBに対するSQLを書く）
-  - レポート全体で利用する変数の定義
-  - レポートを生成するときに利用する引数の定義
-
-:Palette(左上、画像では隠れている):
-  タブを開くと以下のようになっている。
-  .. image: image/palette.png
-  
-  基本的にはReport Itemsの内容をメイン画面のLayoutにドラッグ＆ドロップすることで要素を追加する。
-  
-
-:Property Editor(右下):
-  現在Layoutで指定している要素やMaster Pageを選択したときなどに、情報を編集することができる。
+   * - 画面
+     - 説明
+   * - メイン画面(右上)
+     - デザイナのメイン画面。
+       この画面上の要素を選択、編集、ドラッグなどすることでレポートの雛形を編集する。
+       
+       左下にLayout, Master Page, Script, XML Source, Previewがあるが、それぞれ以下の役割を持つ。
+       
+       - Layout: 通常のデザイナ。GUIベースの操作を行う画面。
+       - Master Page: レポート全体の設定を行う。用紙サイズや余白の調整など。
+       - Script: レポートの要素を判定するプログラムを記述できる。本稿では扱わない。
+       - XML Source: デザイナが生成した生のXMLソースを編集できる。Layoutでは面倒くさい細かい作業を行うのに使うと便利。
+       - Preview: 実際のデータソースを読み込んだプレビューを行える。ただし、幾つかの条件でレイアウトが崩れる(きちんと出力すると直っている)。
+       
+   * - Navigator(左下)
+     - 今開いているEclipseで管理しているプロジェクトが表示される。
+       ファイルの追加などは、この画面の右クリックからが便利
+       (普段利用しているEclipseと同様の作業が可能)。
+   * - Data Explorer(左上)
+     - このレポートで利用する変数関連の設定を行う。
+       例えば、以下のような設定ができる。
+       
+       - データソース(レポート用のデータの取得元)を設定
+       - 取得するデータの形式定義(例えば、DBに対するSQLを書く）
+       - レポート全体で利用する変数の定義
+       - レポートを生成するときに利用する引数の定義
+       
+   * - Palette(左上、画像では隠れている)
+     - タブを開くと以下のようになっている。
+       
+       .. image:: image/palette.png
+       
+       基本的にはReport Itemsの内容をメイン画面のLayoutにドラッグ＆ドロップすることで要素を追加する。
+   * - Property Editor(右下)
+     - 現在Layoutで指定している要素やMaster Pageを選択したときなどに、情報を編集することができる。
 
 
 4.2. プロジェクトの作成
@@ -172,7 +175,7 @@ Eclipse BIRT Designerを開くと、以下のような画面が表示される�
 この節では、example1/example1-1.rptdesign を作成する手順を紹介する。
 ここでは、以下の要素を扱う。
 
-.. image: image/example1-1.png
+.. image:: image/example1-1.png
 
 - 要素の追加、レイアウトの編集について
 - 静的画像の追加について
@@ -233,29 +236,30 @@ LabelやGridについては、デザイナで触ってみれば分かると思�
 
 Dataをドラッグ＆ドロップして挿入すると、以下のようなウインドウが表示される。
 
-.. image: image/new-data-binding.png
+.. image:: image/new-data-binding.png
 
 これは、それぞれ以下の意味を持つ。
 
-:Column Binding Name:
-  このDataオブジェクトの識別子。基本的にはDisplay Nameと同じ内容を推奨。
+.. list-table:: 表5-1. Local要素の説明
+   :header-rows: 1
 
-:Display Name:
-  画面上に表示される名前。このプロジェクトではTODAYと記載した。
-
-:Data Type:
-  この出力がJavaのどの型として扱われるか。
-  基本はString, Decimal, Float, Integer, Dateなどを扱う。
-  
-  ここではDateを指定した。
-
-:Expression:
-  この出力がどのような式で出力されるか。
-  JavaとJavaScriptを混在した式が書ける。
-  ここで出力した型がDataTypeで指定した内容と一致する必要がある。
-  詳しい活用については後述する。
-  
-  ここでは"new Date()"とだけ記載した。
+   * - 要素名
+     - 説明
+   * - Column Binding Name
+     - このDataオブジェクトの識別子。基本的にはDisplay Nameと同じ内容を推奨。
+   * - Display Name
+     - 画面上に表示される名前。このプロジェクトではTODAYと記載した。
+   * - Data Type
+     - この出力がJavaのどの型として扱われるか。
+       基本はString, Decimal, Float, Integer, Dateなどを扱う。
+       ここではDateを指定した。
+   * - Expression
+     - この出力がどのような式で出力されるか。
+       JavaとJavaScriptを混在した式が書ける。
+       ここで出力した型がDataTypeで指定した内容と一致する必要がある。
+       詳しい活用については後述する。
+       
+       ここでは"new Date()"とだけ記載した。
 
 
 5.3.2. Imageの編集(Local要素)
@@ -263,7 +267,7 @@ Dataをドラッグ＆ドロップして挿入すると、以下のようなウ�
 
 Imageをドラッグ＆ドロップして挿入すると、以下のようなウインドウが表示される。
 
-.. image: image/image-edit.png
+.. image:: image/image-edit.png
 
 レポート出力で使うことが想定されるのは、
 レポート出力システムと同一のコンピュータ上にある画像をレポートに出力することである。
@@ -281,12 +285,12 @@ Imageをドラッグ＆ドロップして挿入すると、以下のようなウ
 プレビュー前に現在編集中のファイルを1度保存した後、レポートのプレビューを出力する。
 今回の場合は、以下のようなプレビュー画面が表示される。
 
-.. image: image/preview.png
+.. image:: image/preview.png
 
 何らかの問題がある場合は、プレビュー結果の一番下に赤色の文字でエラー内容が表示される。
 エラーの例を以下に示す。
 
-.. image: image/preview-error.png
+.. image:: image/preview-error.png
 
 この場合、Data TypeとしてBooleanを選んでいるが、出力結果がBooleanに変換できない旨のエラーが表示されている。
 
@@ -311,7 +315,7 @@ Styleは個別に定義し、複数のオブジェクトに使いまわすこと
 "要素を右クリック > Style" を押下することで、その要素に対するスタイルをどのようにするかを選択できる。
 各オブジェクトにStyleは1つ(あるいは0個)しか設定できないので注意すること。
 
-.. image: image/style-edit.png
+.. image:: image/style-edit.png
 
 新しいスタイルを作りたい場合は、New Styleをクリックすることでスタイルを作成できる。
 
@@ -320,30 +324,31 @@ Styleは個別に定義し、複数のオブジェクトに使いまわすこと
 
 スタイルを編集する場合、編集用のウインドウが開くので、その内容を編集する。
 
-.. image: image/style-window.png
+.. image:: image/style-window.png
 
 スタイルで対応できることと具体的な方法を以下に示す。
 
-:スタイルの新規作成・命名変更:
-  General > Custom StyleのNameを変更する
+.. list-table:: 表5-2. スタイルで対応できることとその方法
+   :header-rows: 1
 
-:文字フォントの変更:
-  Fontから内容を変更する。
-  フォント、大きさ、文字色、装飾(太さ、イタリック、下線など)がここで編集できる。
-
-:文字列の左・中央・右寄せ:
-  Text Block > Text alignmentのLeft, Center, Rightを選択
-
-:枠線の設定:
-  Borderを選択し、上下左右のLineStyle, Color, Width(太さ)を選択する
-  ※Gridに枠を設定する場合の注意点は後述
-
-:数値・日付のフォーマット:
-  Format Number, Format DateTime, Format String から元データに応じたフォーマットを選択。
-  幾つかテンプレートのフォーマットがあるが、合わない場合はCustomを選択する。
-  
-  フォーマットの記載方式は、java.text.DecimalFormatとjava.text.SimpleDateFormatのフォーマットを参照のこと。
-  また、Localeが必要な場合にはLocaleを指定すること。
+   * - やりたい事
+     - 方法
+   * - スタイルの新規作成・命名変更:
+     - General > Custom StyleのNameを変更する
+   * - 文字フォントの変更
+     - Fontから内容を変更する。
+       フォント、大きさ、文字色、装飾(太さ、イタリック、下線など)がここで編集できる。
+   * - 文字列の左・中央・右寄せ
+     - Text Block > Text alignmentのLeft, Center, Rightを選択
+   * - 枠線の設定
+     - Borderを選択し、上下左右のLineStyle, Color, Width(太さ)を選択する
+       (※Gridに枠を設定する場合の注意点は後述)
+   * - 数値・日付のフォーマット
+     - Format Number, Format DateTime, Format String から元データに応じたフォーマットを選択。
+       幾つかテンプレートのフォーマットがあるが、合わない場合はCustomを選択する。
+       
+       フォーマットの記載方式は、java.text.DecimalFormatとjava.text.SimpleDateFormatのフォーマットを参照のこと。
+       また、Localeが必要な場合にはLocaleを指定すること。
 
 
 5.5.2. Style適用の注意点
@@ -376,9 +381,11 @@ LabelやDataについては、１つの要素で構成されるが、GridやTabl
 1. 四方を線で囲うstyle(cell-border)を作成する
 2. LayoutでGridを選択する
 3. その状態でXML Sourceを選択する
-  (要素が選択された状態だと、その要素の位置にエディタを開いてくれる)
+   
+   (要素が選択された状態だと、その要素の位置にエディタを開いてくれる)
 4. cellタグの中に"<property name="style">cell-border</property>"を入れる
-  (<cell id="xx"/>となっている場合、<cell id="xx"></cell>と変形して中に入れる)
+   
+   (<cell id="xx"/>となっている場合、<cell id="xx"></cell>と変形して中に入れる)
 5. Layoutに戻る(戻るときに保存するか聞かれるので、保存するを押す)
 
 なお、インデントなどは保存時にEclipseが適切に変更してくれるので気にしなくても良い。
@@ -395,7 +402,7 @@ example1-1では、以下のStyleを作成・適用した。
 
 プレビューの結果が以下の通りである。
 
-.. image: image/style-preview.png
+.. image:: image/style-preview.png
 
 
 5.6. レポートへの出力
@@ -414,7 +421,7 @@ Previewではレイアウトが崩れていることもあるので、
 
 実際にODT形式に出力した場合、以下の結果が得られた(開いたのはOpenOffice 4.0.0)。
 
-.. image: image/odt-sample.png
+.. image:: image/odt-sample.png
 
 装飾の項でも指摘したとおり、styleでfontを指定しなかった部分がプレビューとは異なるフォントになっていることが分かる。
 
