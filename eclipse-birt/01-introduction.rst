@@ -107,7 +107,7 @@ ODT形式で出力されたデータが最もデザイナの画面に忠実な�
 Eclipse BIRT Designerを開くと、以下のような画面が表示される。
 (Eclipseなので、画面のデザインは自分の好みでカスタマイズ可能)
 
-.. image:: image/eclipse-layout.png
+.. image:: image/01/eclipse-layout.png
 
 良く利用するタブと、その役割は以下の通りである。
 
@@ -144,7 +144,7 @@ Eclipse BIRT Designerを開くと、以下のような画面が表示される�
    * - Palette(左上、画像では隠れている)
      - タブを開くと以下のようになっている。
        
-       .. image:: image/palette.png
+       .. image:: image/01/palette.png
        
        基本的にはReport Itemsの内容をメイン画面のLayoutにドラッグ＆ドロップすることで要素を追加する。
    * - Property Editor(右下)
@@ -175,7 +175,7 @@ Eclipse BIRT Designerを開くと、以下のような画面が表示される�
 この節では、example1/example1-1.rptdesign を作成する手順を紹介する。
 ここでは、以下の要素を扱う。
 
-.. image:: image/example1-1.png
+.. image:: image/01/example1-1.png
 
 - 要素の追加、レイアウトの編集について
 - 静的画像の追加について
@@ -236,7 +236,7 @@ LabelやGridについては、デザイナで触ってみれば分かると思�
 
 Dataをドラッグ＆ドロップして挿入すると、以下のようなウインドウが表示される。
 
-.. image:: image/new-data-binding.png
+.. image:: image/01/new-data-binding.png
 
 これは、それぞれ以下の意味を持つ。
 
@@ -267,7 +267,7 @@ Dataをドラッグ＆ドロップして挿入すると、以下のようなウ�
 
 Imageをドラッグ＆ドロップして挿入すると、以下のようなウインドウが表示される。
 
-.. image:: image/image-edit.png
+.. image:: image/01/image-edit.png
 
 レポート出力で使うことが想定されるのは、
 レポート出力システムと同一のコンピュータ上にある画像をレポートに出力することである。
@@ -285,12 +285,12 @@ Imageをドラッグ＆ドロップして挿入すると、以下のようなウ
 プレビュー前に現在編集中のファイルを1度保存した後、レポートのプレビューを出力する。
 今回の場合は、以下のようなプレビュー画面が表示される。
 
-.. image:: image/preview.png
+.. image:: image/01/preview.png
 
 何らかの問題がある場合は、プレビュー結果の一番下に赤色の文字でエラー内容が表示される。
 エラーの例を以下に示す。
 
-.. image:: image/preview-error.png
+.. image:: image/01/preview-error.png
 
 この場合、Data TypeとしてBooleanを選んでいるが、出力結果がBooleanに変換できない旨のエラーが表示されている。
 
@@ -315,7 +315,7 @@ Styleは個別に定義し、複数のオブジェクトに使いまわすこと
 "要素を右クリック > Style" を押下することで、その要素に対するスタイルをどのようにするかを選択できる。
 各オブジェクトにStyleは1つ(あるいは0個)しか設定できないので注意すること。
 
-.. image:: image/style-edit.png
+.. image:: image/01/style-edit.png
 
 新しいスタイルを作りたい場合は、New Styleをクリックすることでスタイルを作成できる。
 
@@ -324,7 +324,7 @@ Styleは個別に定義し、複数のオブジェクトに使いまわすこと
 
 スタイルを編集する場合、編集用のウインドウが開くので、その内容を編集する。
 
-.. image:: image/style-window.png
+.. image:: image/01/style-window.png
 
 スタイルで対応できることと具体的な方法を以下に示す。
 
@@ -402,7 +402,7 @@ example1-1では、以下のStyleを作成・適用した。
 
 プレビューの結果が以下の通りである。
 
-.. image:: image/style-preview.png
+.. image:: image/01/style-preview.png
 
 
 5.6. レポートへの出力
@@ -421,7 +421,7 @@ Previewではレイアウトが崩れていることもあるので、
 
 実際にODT形式に出力した場合、以下の結果が得られた(開いたのはOpenOffice 4.0.0)。
 
-.. image:: image/odt-sample.png
+.. image:: image/01/odt-sample.png
 
 装飾の項でも指摘したとおり、styleでfontを指定しなかった部分がプレビューとは異なるフォントになっていることが分かる。
 
