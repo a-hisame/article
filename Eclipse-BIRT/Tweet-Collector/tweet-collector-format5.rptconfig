@@ -3,11 +3,11 @@
     <list-property name="configVars">
         <structure>
             <property name="name">__isdisplay__keyword_95_0</property>
-            <property name="value">テスト</property>
+            <property name="value">study</property>
         </structure>
         <structure>
             <property name="name">keyword_95_1</property>
-            <property name="value">テスト</property>
+            <property name="value">study</property>
         </structure>
         <structure>
             <property name="name">keyword_95_type_</property>
