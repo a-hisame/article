@@ -1,0 +1,735 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.3.0.v201306041519 Build &lt;4.3.0.v20130611-1045></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="MySQL" id="7">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
+            <property name="odaURL">jdbc:mysql://localhost:3306/tweet_collector</property>
+            <property name="odaUser">tweet_collector</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">dHdlZXRfdHdlZXRfY29sbGVjdG9y</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="get-all" id="8">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">SEARCH_UUID</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SEARCH_UUID</text-property>
+                    <text-property name="heading">SEARCH_UUID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">TIME</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">TIME</text-property>
+                    <text-property name="heading">TIME</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">KEYWORD</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">KEYWORD</text-property>
+                    <text-property name="heading">KEYWORD</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SORT_ORDER</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">SORT_ORDER</text-property>
+                    <text-property name="heading">SORT_ORDER</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">MESSAGE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">MESSAGE</text-property>
+                    <text-property name="heading">MESSAGE</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">SEARCH_UUID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">TIME</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">KEYWORD</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">SORT_ORDER</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">MESSAGE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">MySQL</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">SEARCH_UUID</property>
+                    <property name="nativeName">SEARCH_UUID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">TIME</property>
+                    <property name="nativeName">TIME</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">KEYWORD</property>
+                    <property name="nativeName">KEYWORD</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">SORT_ORDER</property>
+                    <property name="nativeName">SORT_ORDER</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">MESSAGE</property>
+                    <property name="nativeName">MESSAGE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select
+    search.SEARCH_UUID
+  , search.TIME
+  , search.KEYWORD
+  , result.SORT_ORDER
+  , result.MESSAGE
+from search
+inner join result
+  on search.SEARCH_UUID = result.SEARCH_UUID]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SEARCH_UUID</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>36</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>SEARCH_UUID</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>SEARCH_UUID</design:label>
+            <design:formattingHints>
+              <design:displaySize>36</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>TIME</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>TIME</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>TIME</design:label>
+            <design:formattingHints>
+              <design:displaySize>19</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>KEYWORD</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>KEYWORD</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>KEYWORD</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SORT_ORDER</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>11</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>SORT_ORDER</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>SORT_ORDER</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>MESSAGE</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>MESSAGE</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>MESSAGE</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="get-all-count" id="94">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">cnt</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">cnt</text-property>
+                    <text-property name="heading">cnt</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">cnt</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">MySQL</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">cnt</property>
+                    <property name="nativeName">cnt</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select
+    count(*) as cnt
+from search
+inner join result
+  on search.SEARCH_UUID = result.SEARCH_UUID]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SEARCH_UUID</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>36</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>SEARCH_UUID</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>SEARCH_UUID</design:label>
+            <design:formattingHints>
+              <design:displaySize>36</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>TIME</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>TIME</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>TIME</design:label>
+            <design:formattingHints>
+              <design:displaySize>19</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>KEYWORD</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>KEYWORD</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>KEYWORD</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SORT_ORDER</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>11</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>SORT_ORDER</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>SORT_ORDER</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>MESSAGE</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>MESSAGE</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>MESSAGE</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="section-font" id="44">
+            <property name="fontFamily">"ＭＳ Ｐゴシック"</property>
+            <property name="fontSize">14pt</property>
+            <property name="textUnderline">underline</property>
+        </style>
+        <style name="cell-border" id="45">
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+        </style>
+        <style name="table-header-blue" id="46">
+            <property name="backgroundColor">#0000FF</property>
+            <property name="fontFamily">"ＭＳ Ｐゴシック"</property>
+            <property name="fontSize">12pt</property>
+            <property name="color">#FFFFFF</property>
+            <property name="textAlign">center</property>
+        </style>
+        <style name="cell-time-format" id="47">
+            <property name="fontFamily">"ＭＳ Ｐゴシック"</property>
+            <structure name="dateTimeFormat">
+                <property name="category">Custom</property>
+                <property name="pattern">y年M月d日 H:mm:ss</property>
+            </structure>
+        </style>
+        <style name="cell-center-font-10" id="48">
+            <property name="fontFamily">"ＭＳ Ｐゴシック"</property>
+            <property name="textAlign">center</property>
+        </style>
+        <style name="cell-left-font-10" id="49">
+            <property name="fontFamily">"ＭＳ Ｐゴシック"</property>
+        </style>
+        <style name="subheader-orange" id="69">
+            <property name="backgroundColor">#FF8040</property>
+            <property name="fontFamily">"ＭＳ Ｐゴシック"</property>
+            <property name="color">#FFFFFF</property>
+            <property name="textAlign">left</property>
+        </style>
+        <style name="cell-right-font-10" id="80">
+            <property name="fontFamily">"ＭＳ Ｐゴシック"</property>
+            <property name="textAlign">right</property>
+        </style>
+        <style name="table-footer-skyblue" id="83">
+            <property name="backgroundColor">#80FFFF</property>
+            <property name="fontFamily">"ＭＳ Ｐゴシック"</property>
+            <property name="fontSize">12pt</property>
+        </style>
+        <style name="cell-font-10-color-red" id="84">
+            <property name="fontFamily">"ＭＳ Ｐゴシック"</property>
+            <property name="color">#FF0000</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <label id="43">
+            <property name="style">section-font</property>
+            <text-property name="text">◆Tweet検索監視結果</text-property>
+        </label>
+        <data id="93">
+            <property name="dataSet">get-all</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">TWEET_EMPTY_MESSAGE</property>
+                    <text-property name="displayName">TWEET_EMPTY_MESSAGE</text-property>
+                    <expression name="expression" type="javascript">"ツイートの検索結果は0件です。"</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+            </list-property>
+            <property name="resultSetColumn">TWEET_EMPTY_MESSAGE</property>
+        </data>
+        <table id="9">
+            <property name="dataSet">get-all</property>
+            <list-property name="visibility">
+                <structure>
+                    <property name="format">all</property>
+                    <expression name="valueExpr" type="javascript">Total.count() &lt; 1</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">SEARCH_UUID</property>
+                    <text-property name="displayName">SEARCH_UUID</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["SEARCH_UUID"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">TIME</property>
+                    <text-property name="displayName">TIME</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["TIME"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">KEYWORD</property>
+                    <text-property name="displayName">KEYWORD</text-property>
+                    <expression name="expression" type="javascript">"キーワード: " + dataSetRow["KEYWORD"]</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">SORT_ORDER</property>
+                    <text-property name="displayName">SORT_ORDER</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["SORT_ORDER"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">MESSAGE</property>
+                    <text-property name="displayName">MESSAGE</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["MESSAGE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">KEYWORD_COUNT</property>
+                    <text-property name="displayName">KEYWORD_COUNT</text-property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>KeywordGroup</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["KEYWORD"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">SUB_COUNT</property>
+                    <text-property name="displayName">SUB_COUNT</text-property>
+                    <expression name="expression" type="javascript">row["KEYWORD_COUNT"]</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">KEYWORD_TOTAL_COUNT</property>
+                    <text-property name="displayName">KEYWORD_TOTAL_COUNT</text-property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["KEYWORD"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">TOTAL_COUNT</property>
+                    <text-property name="displayName">TOTAL_COUNT</text-property>
+                    <expression name="expression" type="javascript">row["KEYWORD_TOTAL_COUNT"]</expression>
+                    <property name="dataType">integer</property>
+                    <property name="allowExport">true</property>
+                </structure>
+            </list-property>
+            <column id="39">
+                <property name="width">30%</property>
+            </column>
+            <column id="42"/>
+            <header>
+                <row id="10">
+                    <property name="style">table-header-blue</property>
+                    <cell id="13">
+                        <property name="style">cell-border</property>
+                        <label id="14">
+                            <text-property name="text">取得時間</text-property>
+                        </label>
+                    </cell>
+                    <cell id="19">
+                        <property name="style">cell-border</property>
+                        <label id="20">
+                            <text-property name="text">ツイート内容</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <group id="59">
+                <property name="groupName">KeywordGroup</property>
+                <expression name="keyExpr" type="javascript">row["KEYWORD"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue" type="javascript">row["KEYWORD"]</expression>
+                </structure>
+                <property name="hideDetail">false</property>
+                <list-property name="sort">
+                    <structure>
+                        <expression name="key" type="javascript">row["TIME"]</expression>
+                        <property name="direction">asc</property>
+                        <property name="strength">-1</property>
+                    </structure>
+                    <structure>
+                        <expression name="key" type="javascript">row["SORT_ORDER"]</expression>
+                        <property name="direction">asc</property>
+                        <property name="strength">-1</property>
+                    </structure>
+                </list-property>
+                <header>
+                    <row id="60">
+                        <property name="style">subheader-orange</property>
+                        <cell id="61">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="style">cell-border</property>
+                            <data id="68">
+                                <property name="resultSetColumn">KEYWORD</property>
+                            </data>
+                        </cell>
+                    </row>
+                </header>
+                <footer>
+                    <row id="74">
+                        <cell id="75">
+                            <property name="style">cell-border</property>
+                            <label id="78">
+                                <property name="style">cell-right-font-10</property>
+                                <text-property name="text">このキーワードの出現数:</text-property>
+                            </label>
+                        </cell>
+                        <cell id="76">
+                            <property name="style">cell-border</property>
+                            <data id="77">
+                                <property name="style">cell-right-font-10</property>
+                                <property name="resultSetColumn">SUB_COUNT</property>
+                            </data>
+                        </cell>
+                    </row>
+                </footer>
+            </group>
+            <detail>
+                <row id="21">
+                    <list-property name="highlightRules">
+                        <structure>
+                            <property name="operator">match</property>
+                            <property name="backgroundColor">#FFFF80</property>
+                            <property name="color">#FF0000</property>
+                            <expression name="testExpr" type="javascript">row["MESSAGE"]</expression>
+                            <simple-property-list name="value1">
+                                <value type="javascript">".*[lL][oO][vV][eE].*"</value>
+                            </simple-property-list>
+                        </structure>
+                    </list-property>
+                    <list-property name="visibility">
+                        <structure>
+                            <property name="format">all</property>
+                            <expression name="valueExpr" type="javascript">new RegExp("hate", "i").test(row["MESSAGE"])</expression>
+                        </structure>
+                    </list-property>
+                    <cell id="24">
+                        <property name="style">cell-border</property>
+                        <data id="25">
+                            <property name="style">cell-time-format</property>
+                            <property name="resultSetColumn">TIME</property>
+                        </data>
+                    </cell>
+                    <cell id="30">
+                        <property name="style">cell-border</property>
+                        <data id="82">
+                            <property name="style">cell-left-font-10</property>
+                            <property name="resultSetColumn">MESSAGE</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="70">
+                    <property name="style">table-footer-skyblue</property>
+                    <cell id="71">
+                        <property name="style">cell-border</property>
+                        <label id="79">
+                            <property name="style">cell-right-font-10</property>
+                            <text-property name="text">合計件数:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="72">
+                        <property name="style">cell-border</property>
+                        <data id="81">
+                            <property name="style">cell-right-font-10</property>
+                            <property name="resultSetColumn">TOTAL_COUNT</property>
+                        </data>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

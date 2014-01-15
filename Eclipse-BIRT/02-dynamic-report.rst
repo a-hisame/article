@@ -303,6 +303,195 @@ Data Setからドラッグ＆ドロップしてきた場合は、適切なデー
 ここまでの成果はTweet-Collector/tweet-collector-format2.rptdesignに記述されている。
 
 
+6. 条件装飾
+===============================
+
+レポートに出力する際に、データの内容によって出力を変更したい場合がある。
+例えば、以下のようなケースである。
+
+- ある条件を満たしている場合のみ文字の装飾を変える
+- ある条件を満たさないデータを表示しない
+- データの件数が0件の場合と1件以上の場合とで、異なるデータを出力する
+
+Eclipse-BIRTでは、これらの処理をプログラムを書かずに記述することができる。
+
+
+6.1. Highlights
+--------------------------------
+
+ここでは、条件として"love"(大文字小文字を区別しない)が
+ツイート内容に含まれている行を以下のように装飾したいとする。
+
+- 行の文字色を赤色に変更する
+- 行の背景を薄黄色に変更する
+
+このような処理を行いたい場合、Highlights機能を利用する。
+Hightlights機能の利用方法は以下の通りである。
+
+1. 条件装飾を行いたい範囲(ここでは、データを表示する行)を選択する。
+   (行全体ではなく、セル単体を装飾したい場合はここで **セル** を選択する。
+   セル内の要素を選択すると、微妙に隙間が出るので注意すること！)
+
+.. image:: image/02/decoration-01.png
+
+2. "Property Editor > Hightlightsタブ > Addボタン" を押す
+
+.. image:: image/02/decoration-02.png
+
+3. Highlightsの装飾内容と装飾条件を指定する。
+   今回のケースであれば下記の通りに指定すればよい。
+
+.. image:: image/02/decoration-03.png
+
+4. Previewを行い、装飾が行われているかを確かめる。
+   
+   今回のケースであれば下記の通り、
+   "love"がツイート内容に含まれる行だけが装飾されていることが分かる。
+
+.. image:: image/02/decoration-04.png
+
+
+6.2. Visibility
+--------------------------------
+
+ここでは、条件として"hate"(大文字小文字を区別しない)が
+ツイート内容に含まれている行をレポートに表示したくないとする。
+
+このような処理を行いたい場合、Visibility機能を利用する。
+Visibility機能の利用方法は以下の通りである。
+
+1. 表示の有無を条件で切り替えたい要素(ここでは、データを表示する行)を選択する。
+
+.. image:: image/02/decoration-01.png
+
+2. "Property Editor > Propertiesタブ > Visibilityタブ" を押す
+
+.. image:: image/02/decoration-05.png
+
+3. "Hide Element"にチェックを入れる
+4. Detailの中に"画面上に表示しない条件"を記述する。
+   ここの内容は基本的にJavaScriptで記載する。
+   
+   (Javaのクラスも利用はできる)
+   
+   Expressionの結果として真偽値を返す必要がある点に注意する。
+   (そのため、ここでは真偽値を返すRegExp#testを利用している)
+
+.. image:: image/02/decoration-06.png
+
+5. Previewを行い、表示・非表示の有無を確かめる。
+   
+   今回のケースであれば下記の通り、
+   "hate"がツイート内容に含まれる行だけが表示されていないことが分かる。
+
+.. image:: image/02/decoration-07.png
+
+ただし、これはあくまで **表示されていない** だけである点に注意する。
+その証拠に、"キーワード: study"の出現数は表示される前と変わらず3のままである。
+
+これらの集計結果を正確に求めたい場合は、データソースの取得時に加工する必要がある。
+
+
+6.3. 0件/それ以外の表示切替
+--------------------------------
+
+Visibilityを応用することで、0件とそれ以外の場合の表示を切り替えることができる。
+具体的な方法は以下の通りである。
+
+1. データソースに件数を取得するクエリを設定する
+2. 0件の場合に表示する文言(Data)を追加する
+3. 表に件数が0の時に非表示となるVisibilityを設定する
+
+これらは、以下の手順で実行可能である。
+
+1. "Data Explorer > Data Sets > get-all" をコピー＆ペーストする
+   (get-all1という名前のDataSetsができる)
+2. F2ボタン、あるいは"Property Editor > General" から名前を "get-all-count"に変更する
+3. Queryを以下のように変更する
+   (データではなく、件数を取得するように変更)。
+
+::
+
+  select
+      count(*) as cnt
+  from search
+  inner join result
+    on search.SEARCH_UUID = result.SEARCH_UUID
+
+4. OKボタンを押し、"Edit Data Set"を閉じる。
+5. Paletteから、0件のメッセージを出力したい箇所(表の前後のいずれか)にDataをドラッグ＆ドロップする。
+6. 以下の内容でData Bindingを作成する。ここのExpressionは0件の場合に表示する文言である。
+
+.. image:: image/02/decoration-10.png
+
+7. 今追加したDataを選択し、"Property Editor > Bindingタブ > Data Set" から get-all-count を選択する。
+   この時、現在登録されているBindingをクリアするかを問われるので、"No"を選択する。
+
+8. get-all-countの全てのカラムが追加される。
+
+.. image:: image/02/decoration-11.png
+
+9. "Property Editor > Properties > Visibility" を選び、非表示条件を設定する。
+   今回の場合、0件より大きければメッセージを非表示にする。
+
+.. image:: image/02/decoration-12.png
+
+10. 同様に、表そのもののVisibilityを設定する。
+   この場合は、0件のときのみ非表示。
+   
+   テーブルの件数を判定するには、Totalヘルパを利用する(理由は補足2を参照)
+
+.. image:: image/02/decoration-13.png
+
+11. Previewを行い、表示を確かめる。
+    データが存在する場合はこのメッセージが表示されない。
+    
+    一方で、データが0件の場合は、このメッセージが表示される。
+
+.. image:: image/02/decoration-14.png
+.. image:: image/02/decoration-15.png
+
+
+ここまでの成果はTweet-Collector/tweet-collector-format3.rptdesignに記述されている。
+
+
+補足1: Dataを利用する理由
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+BIRTでデータセットを利用する場合、
+あるオブジェクトがどのデータセットを使うかをbindする必要がある。
+
+そして、たんなるLabelはDataをバインドできない。
+
+データソースの内容によって動的にデータを変更したい場合はDataオブジェクトを使用する必要がある。
+
+
+補足2: 表の件数について
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ここで利用しているTotalクラスは集約機能のヘルパ関数である
+(公式のリファレンスが発見できなかったが、 `IBMが公表している情報`_ がある。
+見つけ次第追記する)。
+
+BIRTの仕様から、 **1つのオブジェクトに紐付けできるDataSetは1つである。**
+そして、Tableは表の内容であるDataSetと紐付いている。
+
+Computed Column(SQLの結果を元に計算を行い、 **得られた行に結果を付与する** 仕組み)を使って、
+DataSetの累計数を取得することは可能であるが、
+この場合、 **0件のときにはレコードが1件も取れないため、Computed Columnの値が不定になってしまう** 。
+
+レコードが0件の場合のComputed Columnの扱いがWindows版とLinux版とで一部異なることを確認している
+(Windowsではnull判定で0件のケースを確認できたが、Linuxではそうは行かない結果が得られた)ので、
+この情報をあてにするのは難しい。
+
+以上の理由から、集約機能のヘルパ関数であるTotalを用いないと0件の判定を行うことができないため
+Totalクラスを利用したVisibilityの判定を行っている。
+
+
+.. _`IBMが公表している情報`: http://publib.boulder.ibm.com/infocenter/radhelp/v7r0m0/index.jsp?topic=/org.eclipse.birt.doc/birt/birt-24-4.html
+
+
+
 
 参考文献
 ==============================
