@@ -400,6 +400,7 @@ Visibilityを応用することで、0件とそれ以外の場合の表示を切
 
 1. データソースに件数を取得するクエリを設定する
 2. 0件の場合に表示する文言(Data)を追加する
+   (補足: 7節でTotalクラスを利用したもっと良い方法を伝える)
 3. 表に件数が0の時に非表示となるVisibilityを設定する
 
 これらは、以下の手順で実行可能である。
@@ -490,6 +491,122 @@ Totalクラスを利用したVisibilityの判定を行っている。
 
 .. _`IBMが公表している情報`: http://publib.boulder.ibm.com/infocenter/radhelp/v7r0m0/index.jsp?topic=/org.eclipse.birt.doc/birt/birt-24-4.html
 
+
+7. レポート生成時の引数
+===============================
+
+これまであるデータソースを元にしてレポートを加工してきたが、
+出力するレポートに対して引数を与えてレポートを作成したい場合がある。
+
+例えば、レポートのデータの期間、日付情報やレポートのキーワードがそれに当たる。
+
+ここでは、レポートの引数を利用する方法を見ていく。
+
+
+7.1. 引数の設定
+------------------------------
+
+これまでのTweet-Collectorは、全ての検索結果を表示していた。
+ここでは、引数で指定したキーワードで検索された結果だけを表示したいとする。
+
+レポート生成時に引数を指定するためには、
+"Data Explorer > Report Parameters"に値を追加すればよい。
+
+"Report Parametersで右クリック > New Parameter"をクリックすると、パラメータを編集するダイアログが表示される。
+今回は、以下のようなパラメータの設定を行う。
+
+.. image:: image/02/argument-01.png
+
+この設定を行った後、PreviewやRunによる書き出しを行おうとすると、
+次のような入力ダイアログが表示される。
+
+.. image:: image/02/argument-02.png
+
+ここで入力した引数は、レポートの生成時に利用される。
+(この時点では設定しただけであり、まだレポートには反映されない)
+
+この内容をそのまま利用したい場合(例えば、文言を引数で受け取りたい場合など)は
+"Data Explorer > Report Parameters"の中の要素をメイン画面にドラッグ＆ドロップすれば利用できる。
+(Expression内で **params["パラメータ名"]**と参照することで利用可能である)
+
+引数の設定を行った場合、reportファイルと同じ場所に **[reporファイル名].rptconfig**
+という名前のファイルが作られる(中身はXMLファイル)。
+デフォルトの入力値などは、このファイルに記載されている。
+
+
+7.2. 引数とデータソースの連携
+------------------------------
+
+レポートの生成時に引数を与えることはできるようになったため、
+データソースの取得時の条件にこの引数を与えたい。
+
+**しかし、データソースから取得する部分(Query)に直接引数を与えることはできない。**
+
+これを解決するためには、DataSetのFilterという機能を利用する。
+この機能を利用すると以下の手順で処理を行ったデータソースを利用可能になる。
+
+1. まずQueryを発行しデータソースからデータを取得する
+2. 1で取得したデータから、特定の条件を満たすものだけを選ぶ
+
+そのため、ここではget-allに対して、Filtersを作成する。
+手順は以下の通りである。
+
+1. データセット(ここではget-all)を選び、Edit画面を表示する
+2. 左のリストからFiltersを選び、右のNewボタンを押す
+
+.. image:: image/02/argument-03.png
+
+3. Filterの条件(データソースとして取得する条件)を記載する。
+   ここでは、"KEYWORDの値がレポートのkeyword引数の中身と一致する"ことを条件とする。
+
+.. image:: image/02/argument-04.png
+
+4. OKを押し、左のリストからPreview Resultsを見る。
+   Filterの条件に一致するもののみが結果として得られていることが分かる。
+   
+   (ここのPreviewでは、引数のデフォルト値として設定した値を使った結果を見せてくれる)
+
+- Filterの条件設定前
+
+.. image:: image/02/argument-05.png
+
+- Filterの条件設定後
+
+.. image:: image/02/argument-06.png
+
+
+get-all-countはTotalクラスを利用すれば不要となる。
+以下の手順でTotalクラスを利用する。
+
+1. Data: TWEET_EMPTY_MESSAGEのData Setとしてget-allを指定する。
+   (この時、TWEET_EMPTY_MESSAGEを削除しないように注意)
+2. 利用するデータ(KEYWORD)以外を全て削除する
+
+.. image:: image/02/argument-09.png
+
+3. Visibilityに次の値を設定する。
+   (最初の引数はTotal.countの引数として機能する)
+
+.. image:: image/02/argument-10.png
+
+
+以上の手順で引数のキーワードを表示するレポートが完成した。
+Previewの結果を以下に示す。
+
+- 引数が"テスト"の場合
+
+.. image:: image/02/argument-11.png
+
+- 引数が"study"の場合
+
+.. image:: image/02/argument-12.png
+
+- 引数が"hogehoge"の場合
+
+.. image:: image/02/argument-13.png
+
+
+ここまでの成果はTweet-Collector/tweet-collector-format4.rptdesign (およびrptconfig)に記述されている。
 
 
 
