@@ -295,6 +295,22 @@ Imageをドラッグ＆ドロップして挿入すると、以下のようなウ
 この場合、Data TypeとしてBooleanを選んでいるが、出力結果がBooleanに変換できない旨のエラーが表示されている。
 
 
+プレビュー画面の補足
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Windows 7以降でEclipse BIRTを利用する場合、プレビュー画面が利用できない場合がある。
+これは、IE11が入ることにより、Eclipseそのもののブラウザ機能が使えなくなる問題のため。
+
+(参考: http://developer.actuate.com/community/forum/index.php?/topic/30484-birt-report-not-running-in-eclipse-after-update-to-windows-81/ )
+
+上記の現象が発生した場合、eclipse.iniの末尾に以下の2行を追加すること。
+
+::
+
+  -Dorg.eclipse.swt.browser.DefaultType=ie,mozilla
+  -Dorg.eclipse.swt.browser.IEVersion=9999
+
+
 5.5. 装飾
 -----------------------------------
 
