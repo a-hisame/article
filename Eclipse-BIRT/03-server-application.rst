@@ -90,9 +90,9 @@ Fedora19なら以下のコマンドを実行すると良い。
 BIRTランタイムを利用するため、以下の作業を行う。
 
 1. Javaをインストール
-1. Tomcatをインストールする
-2. TomcatのappBaseにBIRTランタイムを配置する
-3. TomcatのlibにConnect/Jのjarファイルを配置する
+2. Tomcatをインストールする
+3. TomcatのappBaseにBIRTランタイムを配置する
+4. TomcatのlibにConnect/Jのjarファイルを配置する
 
 今回は以下の設定とした。
 
