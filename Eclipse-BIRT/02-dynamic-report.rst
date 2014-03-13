@@ -400,7 +400,6 @@ Visibilityを応用することで、0件とそれ以外の場合の表示を切
 
 1. データソースに件数を取得するクエリを設定する
 2. 0件の場合に表示する文言(Data)を追加する
-   (補足: 7節でTotalクラスを利用したもっと良い方法を伝える)
 3. 表に件数が0の時に非表示となるVisibilityを設定する
 
 これらは、以下の手順で実行可能である。
@@ -438,9 +437,9 @@ Visibilityを応用することで、0件とそれ以外の場合の表示を切
 .. image:: image/02/decoration-12.png
 
 10. 同様に、表そのもののVisibilityを設定する。
-   この場合は、0件のときのみ非表示。
-   
-   テーブルの件数を判定するには、Totalヘルパを利用する(理由は補足2を参照)
+    この場合は、0件のときのみ非表示。
+    
+    テーブルの件数を判定するには、Totalヘルパを利用する(理由は補足2を参照)
 
 .. image:: image/02/decoration-13.png
 
@@ -488,6 +487,8 @@ DataSetの累計数を取得することは可能であるが、
 以上の理由から、集約機能のヘルパ関数であるTotalを用いないと0件の判定を行うことができないため
 Totalクラスを利用したVisibilityの判定を行っている。
 
+なお、0件の場合にcountを用いたSQLを利用したが、
+データが適切にバインドされているならば hide条件: Total.count() > 0 で判定可能(7.2で説明している)。
 
 .. _`IBMが公表している情報`: http://publib.boulder.ibm.com/infocenter/radhelp/v7r0m0/index.jsp?topic=/org.eclipse.birt.doc/birt/birt-24-4.html
 
